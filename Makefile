@@ -1,18 +1,17 @@
-CC=gcc
+CC=g++
 CFLAGS=-Wall
 LDFLAGS=-lncurses
-BUILD_DIR=./build
 
 all: kingdoms
 
-%.o: %.c $(DEPS)
-	$(CC) -c -o $(BUILD_DIR)/$@ $< $(CFLAGS)
+%.o: %.cpp $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
 kingdoms: main.o
 	$(CC) -o kingdoms main.o $(CFLAGS) $(LDFLAGS)
 
 clean:
-	rm -rf $(BUILD_DIR)/*.o kingdoms
+	rm -rf *.o kingdoms
 
 run:
 	./kingdoms
