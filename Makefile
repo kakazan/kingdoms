@@ -1,14 +1,17 @@
-CC=g++
-CFLAGS=-Wall
-LDFLAGS=-lncurses
+CC 		= g++
+CFLAGS 	= -Wall
+LDFLAGS = -lncurses
+
+DEPS 	= view.hpp
+OBJS 	= main.o view.o
 
 all: kingdoms
 
 %.o: %.cpp $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -c -o $@ $< $(CFLAGS) -I.
 
-kingdoms: main.o
-	$(CC) -o kingdoms main.o $(CFLAGS) $(LDFLAGS)
+kingdoms: $(OBJS)
+	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -I.
 
 clean:
 	rm -rf *.o kingdoms
