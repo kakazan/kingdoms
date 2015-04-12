@@ -1,5 +1,43 @@
 #include "view.hpp"
 
+/******************************************************************************
+ * Public
+ * ***************************************************************************/
+View::~View() {
+  endwin();
+}
+
+WINDOW *View::getUIWindow() {
+  return UIWindow;
+}
+
+WINDOW *View::getInputWindow() {
+  return inputWindow;
+}
+
+void View::init() {
+  initVars();
+  initUIWindow();
+  initInputWindow();
+  refresh();
+}
+
+void View::refreshUIWindow() {
+  wrefresh(UIWindow);
+}
+
+void View::refreshInputWindow() {
+  wrefresh(inputWindow);
+}
+
+void View::refresh() {
+  refreshUIWindow();
+  refreshInputWindow();
+}
+
+/******************************************************************************
+ * Private
+ * ***************************************************************************/
 void View::initVars() {
   initscr();
   clear();
@@ -25,36 +63,3 @@ void View::initInputWindow() {
                        0);                       // x0
   box(inputWindow, 0, 0);
 }
-
-void View::refreshUIWindow() {
-  wrefresh(UIWindow);
-}
-
-void View::refreshInputWindow() {
-  wrefresh(inputWindow);
-}
-
-void View::refresh() {
-  refreshUIWindow();
-  refreshInputWindow();
-}
-
-View::~View() {
-  endwin();
-}
-
-void View::init() {
-  initVars();
-  initUIWindow();
-  initInputWindow();
-  refresh();
-}
-
-WINDOW *View::getInputWindow() {
-  return inputWindow;
-}
-
-WINDOW *View::getUIWindow() {
-  return UIWindow;
-}
-
