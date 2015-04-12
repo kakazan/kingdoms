@@ -2,6 +2,7 @@
 #define __VIEW_HPP__
 
 #include <ncurses.h>
+#include "window.hpp"
 
 class View {
     static const int inputWindowSize = 3;
@@ -9,13 +10,16 @@ class View {
     int LINES;
     int COLUMNS;
 
-    WINDOW *inputWindow = NULL;
-    WINDOW *UIWindow = NULL;
+    Window *inputWindow;
+    Window *UIWindow;
 
   public:
-    ~View();
-    WINDOW *getUIWindow();
-    WINDOW *getInputWindow();
+    ~View() {
+      delete inputWindow;
+      delete UIWindow;
+      endwin();
+    };
+
     void init();
     void refreshUIWindow();
     void refreshInputWindow();
@@ -23,8 +27,7 @@ class View {
 
   private:
     void initVars();
-    void initUIWindow();
-    void initInputWindow();
+    void initWindows();
 };
 
 #endif

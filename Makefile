@@ -3,7 +3,7 @@ CFLAGS 	= -Wall
 LDFLAGS = -lncurses
 
 DEPS 	= view.hpp
-OBJS 	= main.o view.o
+OBJS 	= main.o view.o window.o
 
 all: kingdoms
 
